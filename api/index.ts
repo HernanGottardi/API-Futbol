@@ -4,6 +4,14 @@ const cors = require('cors'); // Agrega el paquete cors
 const admin = require('firebase-admin');
 require('dotenv').config();
 
+// Configura CORS para permitir solicitudes desde tu frontend
+const corsOptions = {
+    origin: 'https://front-futbol.vercel.app', // Aquí especifica el origen de tu frontend
+    optionsSuccessStatus: 200 // Algunos navegadores antiguos (IE11, algunos SmartTVs) requieren este estatus.
+  };
+  
+app.use(cors(corsOptions)); // Aplicar CORS a todas las rutas
+
 // Cargar las credenciales desde la variable de entorno
 const credentials_json = {
     "type": "service_account",
@@ -29,7 +37,6 @@ app.get("/games", async (req: any, res: any) =>
         const querySnapshot = await db.collection("Entorno").get();
         const documents = querySnapshot.docs.map((doc: { id: any; data: () => any; }) => ({ id: doc.id, data: doc.data() }));
         res.json(documents);
-        console.log
     } catch (error) {
         console.error("Error al obtener los juegos:", error);
         res.status(500).send('Error al obtener los juegos.');
