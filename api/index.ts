@@ -6,7 +6,7 @@ require('dotenv').config();
 
 // Configura CORS para permitir solicitudes desde tu frontend
 const corsOptions = {
-    origin: 'https://front-futbol.vercel.app', // Aquí especifica el origen de tu frontend
+    origin: '*', // Aquí especifica el origen de tu frontend
     optionsSuccessStatus: 200 // Algunos navegadores antiguos (IE11, algunos SmartTVs) requieren este estatus.
   };
   
